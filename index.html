@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cyvault-sec</title>
+<meta name="description" content="CYVault Security delivers enterprise-grade penetration testing, SOC monitoring, digital forensics and AI-powered cyber defense for organizations across Pakistan and beyond.">
+<link rel="canonical" href="https://www.cyvaultsecurity.com/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z' fill='%230A192F' stroke='%2306B6D4' stroke-width='2'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CYVault Security — Protecting Digital Trust">
+<meta property="og:description" content="Enterprise cybersecurity services: penetration testing, SOC monitoring, digital forensics, cloud security, and incident response.">
+<meta property="og:url" content="https://www.cyvaultsecurity.com/">
+<meta property="og:site_name" content="CYVault Security">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CYVault Security — Protecting Digital Trust">
+<meta name="twitter:description" content="Enterprise cybersecurity services: penetration testing, SOC monitoring, digital forensics, cloud security, and incident response.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CYVault Security",
+  "url": "https://www.cyvaultsecurity.com/",
+  "email": "contact@cyvaultsecurity.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lahore",
+    "addressCountry": "PK"
+  },
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How long does Penetration Testing take?","acceptedAnswer":{"@type":"Answer","text":"Most engagements take 1–3 weeks depending on scope, with timelines confirmed during the scope meeting."}},
+    {"@type":"Question","name":"Do you sign NDAs?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every engagement begins with a signed NDA before any assessment work starts."}},
+    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Pricing depends on scope and complexity. Reach out for a free consultation and a tailored quote."}},
+    {"@type":"Question","name":"Do you provide remediation reports?","acceptedAnswer":{"@type":"Answer","text":"Yes — every assessment includes a detailed report with executive summary, technical findings, and remediation guidance."}},
+    {"@type":"Question","name":"Which industries do you serve?","acceptedAnswer":{"@type":"Answer","text":"Banking, healthcare, education, government, software houses, e-commerce, manufacturing, and SMEs."}},
+    {"@type":"Question","name":"How quickly can you start?","acceptedAnswer":{"@type":"Answer","text":"Standard engagements typically begin within 3–5 business days. Urgent incident response is available faster."}}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --primary:#0A192F;
+  --secondary:#111827;
+  --blue:#3B82F6;
+  --cyan:#06B6D4;
+  --purple:#7C3AED;
+  --text:#FFFFFF;
+  --muted:#94A3B8;
+  --success:#22C55E;
+  --warning:#F59E0B;
+  --danger:#EF4444;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--primary);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.font-display{font-family:'Space Grotesk',sans-serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+::selection{background:var(--cyan); color:#000;}
+
+/* scrollbar */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--primary);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--cyan)); border-radius:4px;}
+
+/* ---------- Loading screen ---------- */
+#loader{
+  position:fixed; inset:0; z-index:9999; background:var(--primary);
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#loader.hide{opacity:0; visibility:hidden;}
+.loader-vault{
+  width:64px; height:64px; position:relative;
+}
+.loader-vault svg{width:100%; height:100%; animation:spin 1.4s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ---------- Background grid + particles ---------- */
+.cyber-grid{
+  position:absolute; inset:0; z-index:0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+}
+.glow-orb{
+  position:absolute; border-radius:50%; filter:blur(100px); opacity:.28; pointer-events:none;
+  animation:orb-drift 18s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+@keyframes orb-drift{
+  0%{transform:translate(0,0) scale(1);}
+  100%{transform:translate(24px,-18px) scale(1.05);}
+}
+
+/* refined cursor glow — quiet, not a spotlight */
+#cursorGlow{
+  position:fixed; width:520px; height:520px; border-radius:50%;
+  background:radial-gradient(circle, rgba(59,130,246,0.06), transparent 72%);
+  pointer-events:none; z-index:1; transform:translate(-50%,-50%);
+  transition:opacity .6s ease, left .25s ease-out, top .25s ease-out;
+  opacity:0; will-change:left,top;
+}
+@media (max-width:1024px){#cursorGlow{display:none;}}
+
+/* floating */
+.float-slow{animation:float-y 7s cubic-bezier(.45,0,.55,1) infinite;}
+@keyframes float-y{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* hero shield signature draw-in */
+.draw-path{
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw-in 2.2s cubic-bezier(.65,0,.35,1) .3s forwards;
+}
+@keyframes draw-in{ to{ stroke-dashoffset:0; } }
+
+/* active nav indicator dot 
+.nav-link.active{color:var(--text);}
+.nav-link.active::after{width:100%;}   */
+
+/* parallax layer for hero grid */
+#home .cyber-grid{transition:transform .1s linear;}
+.particle{
+  position:absolute; width:3px; height:3px; border-radius:50%;
+  background:var(--cyan); opacity:.6;
+  animation:float-up linear infinite;
+}
+@keyframes float-up{
+  0%{transform:translateY(0) translateX(0); opacity:0;}
+  10%{opacity:.7;}
+  90%{opacity:.4;}
+  100%{transform:translateY(-100vh) translateX(20px); opacity:0;}
+}
+
+/* ---------- Glass ---------- */
+.glass{
+  background:rgba(17,24,39,0.55);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(148,163,184,0.12);
+}
+.glass-strong{
+  background:rgba(17,24,39,0.8);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(148,163,184,0.15);
+}
+
+/* ---------- Nav ---------- */
+#navbar{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  transition:all .35s ease;
+  border-bottom:1px solid transparent;
+}
+#navbar.scrolled{
+  background:rgba(10,25,47,0.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(148,163,184,0.1);
+}
+.nav-link{position:relative; color:var(--muted); transition:color .25s;}
+.nav-link:hover{color:var(--text);}
+.nav-link::after{
+  content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transition:width .3s ease;
+}
+.nav-link:hover::after{width:100%;}
+
+/* ---------- Buttons ---------- */
+.btn-primary{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  background-size:200% 100%;
+  transition:background-position .5s ease, transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 0 0 rgba(59,130,246,0);
+}
+.btn-primary:hover{
+  background-position:100% 0;
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px -8px rgba(59,130,246,0.55);
+}
+.cta-glow{animation:cta-pulse 3.6s cubic-bezier(.45,0,.55,1) infinite;}
+@keyframes cta-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,0.22);}
+  50%{box-shadow:0 0 0 10px rgba(6,182,212,0);}
+}
+.btn-primary .ripple{
+  position:absolute; border-radius:50%; background:rgba(255,255,255,0.35);
+  transform:scale(0); animation:ripple .6s ease-out forwards; pointer-events:none;
+}
+@keyframes ripple{to{transform:scale(4); opacity:0;}}
+.btn-outline{
+  border:1px solid rgba(148,163,184,0.3); color:var(--text);
+  transition:all .3s ease; position:relative;
+}
+.btn-outline:hover{
+  border-color:var(--cyan); box-shadow:0 0 20px -4px rgba(6,182,212,0.5);
+  background:rgba(6,182,212,0.06);
+}
+
+/* ---------- Reveal animations ---------- */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+.reveal-scale{opacity:0; transform:scale(.96); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal-scale.in{opacity:1; transform:scale(1);}
+
+/* ---------- Cards ---------- */
+.service-card{
+  position:relative; overflow:hidden; transition:transform .45s cubic-bezier(.22,1,.36,1), border-color .45s ease, box-shadow .45s ease;
+  will-change:transform;
+}
+.service-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(59,130,246,0.4);
+  box-shadow:0 20px 50px -20px rgba(59,130,246,0.35);
+}
+.service-card .icon-wrap{
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.service-card:hover .icon-wrap{
+  transform:scale(1.08) rotate(-4deg);
+  box-shadow:0 0 25px -2px rgba(6,182,212,0.6);
+}
+.service-card .corner-glow{
+  position:absolute; top:-40px; right:-40px; width:120px; height:120px;
+  background:radial-gradient(circle, rgba(124,58,237,0.4), transparent 70%);
+  opacity:0; transition:opacity .4s ease;
+}
+.service-card:hover .corner-glow{opacity:1;}
+
+/* ---------- Team cards ---------- */
+.team-card{transition:transform .4s ease, box-shadow .4s ease;}
+.team-card:hover{transform:translateY(-8px);}
+.team-photo{
+  background:linear-gradient(135deg, rgba(59,130,246,0.25), rgba(124,58,237,0.25));
+  position:relative; overflow:hidden;
+}
+.team-photo::after{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:14px 14px;
+}
+.social-btn{
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  border-radius:8px; background:rgba(148,163,184,0.1); transition:all .25s ease;
+}
+.social-btn:hover{background:var(--cyan); color:#0A192F; transform:translateY(-2px);}
+
+/* ---------- Stats counter ---------- */
+.stat-number{font-family:'Space Grotesk',sans-serif; font-weight:700;}
+
+/* ---------- Process ---------- */
+.process-step{position:relative;}
+.process-line{
+  position:absolute; top:28px; left:50%; width:100%; height:1px;
+  background:linear-gradient(90deg, rgba(59,130,246,0.5), rgba(6,182,212,0.1));
+  z-index:0;
+}
+
+/* ---------- Marquee for "trusted by" ---------- */
+.marquee-track{
+  display:flex; gap:4rem; animation:marquee 28s linear infinite; white-space:nowrap;
+}
+@keyframes marquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+/* ---------- Testimonial carousel ---------- */
+.testimonial-track{display:flex; transition:transform .6s cubic-bezier(.65,0,.35,1);}
+.dot{width:8px; height:8px; border-radius:50%; background:rgba(148,163,184,0.3); transition:all .3s ease; cursor:pointer;}
+.dot.active{background:var(--cyan); width:24px; border-radius:4px;}
+
+/* ---------- Back to top ---------- */
+#backToTop{
+  position:fixed; bottom:28px; right:28px; z-index:900;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease;
+  transform:translateY(10px);
+}
+#backToTop.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+/* ---------- Scroll progress ---------- */
+#scrollProgress{
+  position:fixed; top:0; left:0; height:3px; z-index:1100;
+  background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));
+  width:0%;
+}
+
+/* ---------- Badge ---------- */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--cyan);
+  border:1px solid rgba(6,182,212,0.3); padding:6px 14px; border-radius:999px;
+  background:rgba(6,182,212,0.06);
+}
+.eyebrow .dot-live{width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 8px var(--success); animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.3;}}
+
+/* Hero shield animation */
+.shield-ring{
+  animation:rotate-slow 14s linear infinite;
+  transform-origin:center;
+}
+@keyframes rotate-slow{to{transform:rotate(360deg);}}
+.pulse-ring{animation:pulse-ring 3s ease-out infinite;}
+@keyframes pulse-ring{
+  0%{stroke-opacity:.6; r:60;}
+  100%{stroke-opacity:0; r:110;}
+}
+
+/* gradient text */
+.grad-text{
+  background:linear-gradient(90deg, var(--blue), var(--cyan));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* ---------- FAQ accordion ---------- */
+.faq-toggle{background:transparent; border:none; color:var(--text); cursor:pointer; font-family:inherit; font-size:0.95rem;}
+.faq-icon{transition:transform .3s ease; flex-shrink:0; margin-left:12px;}
+.faq-item.open .faq-icon{transform:rotate(180deg);}
+.faq-panel{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+
+/* ---------- Blog article modal ---------- */
+.blog-modal-overlay{
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(5,10,20,0.7); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:24px; opacity:0; visibility:hidden;
+  transition:opacity .3s ease, visibility .3s ease;
+}
+.blog-modal-overlay.open{opacity:1; visibility:visible;}
+.blog-modal{
+  position:relative; width:100%; max-width:680px; max-height:85vh;
+  transform:translateY(16px) scale(.98); opacity:0;
+  transition:transform .35s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+}
+.blog-modal-overlay.open .blog-modal{transform:translateY(0) scale(1); opacity:1;}
+.blog-modal-scroll{max-height:85vh; overflow-y:auto; padding:40px 36px;}
+.blog-modal-close{
+  position:absolute; top:16px; right:16px; z-index:10;
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(148,163,184,0.12); color:var(--text); border:none; cursor:pointer;
+  transition:background .25s ease;
+}
+.blog-modal-close:hover{background:rgba(239,68,68,0.25);}
+.blog-modal-body p{margin-bottom:14px; line-height:1.7;}
+.blog-modal-body h4{color:var(--text); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.05rem; margin:22px 0 8px;}
+.blog-modal-body ul{margin:0 0 14px 1.1rem; list-style:disc;}
+.blog-modal-body li{margin-bottom:6px; line-height:1.6;}
+body.modal-open{overflow:hidden;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important;}
+}
+</style>
+</head>
+<body class="relative">
+<div id="cursorGlow"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-vault">
+    <svg viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="26" stroke="#1f2937" stroke-width="4"/>
+      <circle cx="32" cy="32" r="26" stroke="#06B6D4" stroke-width="4" stroke-linecap="round" stroke-dasharray="60 100"/>
+    </svg>
+  </div>
+</div>
+
+<div id="scrollProgress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar" class="py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-2.5 font-display font-bold text-lg">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z" stroke="url(#navGrad)" stroke-width="2" fill="rgba(59,130,246,0.08)"/>
+        <rect x="14" y="18" width="12" height="10" rx="2" stroke="#06B6D4" stroke-width="1.6"/>
+        <path d="M16.5 18V15.5C16.5 13 18 11.5 20 11.5C22 11.5 23.5 13 23.5 15.5V18" stroke="#3B82F6" stroke-width="1.6"/>
+        <circle cx="20" cy="22.5" r="1.6" fill="#06B6D4"/>
+        <defs><linearGradient id="navGrad" x1="6" y1="3" x2="34" y2="37"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+      </svg>
+      <span>CYVault<span class="grad-text"> Security</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-9">
+      <a href="#home" class="nav-link text-sm">Home</a>
+      <a href="about.html" class="nav-link text-sm">About</a>
+      <a href="services.html" class="nav-link text-sm">Services</a>
+      <!--<a href="#process" class="nav-link text-sm">Process</a>-->
+      <a href="blogs/blog.html" class="nav-link text-sm">Blog</a>
+      <a href="contact.html" class="nav-link text-sm">Contact</a>
+    </div>
+    <div class="hidden lg:block">
+      <a href="#academy" class="btn-primary text-sm font-semibold px-5 py-2.5 rounded-lg" onclick="ripple(event)">Academy</a>
+    </div>
+    <button id="menuBtn" class="lg:hidden text-white">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="lg:hidden hidden glass-strong mt-3 mx-4 rounded-xl p-5 flex flex-col gap-4">
+    <a href="#home" class="nav-link text-sm">Home</a>
+    <a href="about.html" class="nav-link text-sm">About</a>
+    <a href="services.html" class="nav-link text-sm">Services</a>
+      <!--<a href="#process" class="nav-link text-sm">Process</a>-->
+    <a href="blogs/blog.html" class="nav-link text-sm">Blog</a>
+    <a href="contact.html" class="nav-link text-sm">Contact</a>
+    <a href="#contact" class="btn-primary text-sm font-semibold px-5 py-2.5 rounded-lg text-center">Academy</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+  <div class="cyber-grid"></div>
+  <div class="glow-orb" style="width:500px;height:500px; background:var(--blue); top:-100px; left:-150px;"></div>
+  <div class="glow-orb" style="width:450px;height:450px; background:var(--purple); bottom:-150px; right:-100px;"></div>
+  <div id="particleField" class="absolute inset-0 pointer-events-none z-0"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="eyebrow reveal"><span class="dot-live"></span> SOC ACTIVE · MONITORING 24/7</div>
+      <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mt-6 reveal">
+        Protect Your Business<br><span class="grad-text">Before Attackers Find the Weaknesses</span>
+      </h1>
+      <p class="text-lg mt-6 max-w-lg reveal" style="color:var(--muted);">
+        Enterprise cybersecurity services that identify vulnerabilities, prevent attacks, and secure modern organizations through penetration testing, SOC monitoring, digital forensics, cloud security, and incident response.
+      </p>
+      <div class="flex flex-wrap gap-4 mt-9 reveal">
+        <a href="#contact" class="btn-primary font-semibold px-7 py-3.5 rounded-lg" onclick="ripple(event)">Request Assessment</a>
+        <a href="services.html" class="btn-outline font-semibold px-7 py-3.5 rounded-lg">Explore Services</a>
+      </div>
+
+      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-7 reveal">
+        <span class="text-xs flex items-center gap-1.5" style="color:var(--muted);"><span style="color:var(--success);">✓</span> NDA Protected</span>
+        <span class="text-xs flex items-center gap-1.5" style="color:var(--muted);"><span style="color:var(--success);">✓</span> Confidential Engagements</span>
+        <span class="text-xs flex items-center gap-1.5" style="color:var(--muted);"><span style="color:var(--success);">✓</span> Based in Pakistan</span>
+        <span class="text-xs flex items-center gap-1.5" style="color:var(--muted);"><span style="color:var(--success);">✓</span> Security First</span>
+      </div>
+
+      <div class="grid grid-cols-4 gap-6 mt-12 reveal">
+        <div><div class="stat-number text-2xl md:text-3xl grad-text">24/7</div><div class="text-xs mt-1" style="color:var(--muted);">Monitoring</div></div>
+        <div><div class="stat-number text-2xl md:text-3xl grad-text">100%</div><div class="text-xs mt-1" style="color:var(--muted);">Confidential</div></div>
+        <div><div class="stat-number text-2xl md:text-3xl grad-text">Expert</div><div class="text-xs mt-1" style="color:var(--muted);">Security Team</div></div>
+        <div><div class="stat-number text-2xl md:text-3xl grad-text">Rapid</div><div class="text-xs mt-1" style="color:var(--muted);">Incident Response</div></div>
+      </div>
+    </div>
+
+    <div class="relative flex items-center justify-center reveal-scale float-slow">
+      <svg viewBox="0 0 400 400" class="w-full max-w-md">
+        <defs>
+          <linearGradient id="shieldGrad" x1="0" y1="0" x2="400" y2="400">
+            <stop stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/>
+          </linearGradient>
+        </defs>
+        <circle cx="200" cy="200" r="60" stroke="#3B82F6" stroke-width="1" fill="none" class="pulse-ring"/>
+        <circle cx="200" cy="200" r="150" stroke="rgba(148,163,184,0.15)" stroke-width="1" fill="none" stroke-dasharray="4 6" class="shield-ring"/>
+        <circle cx="200" cy="200" r="120" stroke="rgba(6,182,212,0.2)" stroke-width="1" fill="none"/>
+        <path d="M200 90L290 122V200C290 250 250 280 200 305C150 280 110 250 110 200V122L200 90Z" fill="rgba(17,24,39,0.7)" stroke="url(#shieldGrad)" stroke-width="2.5" class="draw-path"/>
+        <rect x="170" y="180" width="60" height="50" rx="6" fill="rgba(10,25,47,0.8)" stroke="#06B6D4" stroke-width="2"/>
+        <path d="M180 180V160C180 148 188 140 200 140C212 140 220 148 220 160V180" stroke="#3B82F6" stroke-width="2.5" fill="none"/>
+        <circle cx="200" cy="202" r="6" fill="#06B6D4"/>
+        <line x1="200" y1="206" x2="200" y2="216" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+        <g opacity="0.6">
+          <circle cx="90" cy="150" r="2.5" fill="#06B6D4"/>
+          <circle cx="320" cy="180" r="2.5" fill="#3B82F6"/>
+          <circle cx="100" cy="280" r="2.5" fill="#7C3AED"/>
+          <circle cx="310" cy="290" r="2.5" fill="#06B6D4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ORGANIZATIONS CHOOSE CYVAULT ============ -->
+<section class="py-10 border-t border-b" style="border-color:rgba(148,163,184,0.08); background:var(--secondary);">
+  <div class="text-center text-xs mono mb-6" style="color:var(--muted); letter-spacing:.1em;">WHY ORGANIZATIONS CHOOSE CYVAULT</div>
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-5">
+    <div class="glass rounded-xl p-4 flex items-center gap-3 justify-center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      <span class="text-sm font-semibold">NDA Protected</span>
+    </div>
+    <div class="glass rounded-xl p-4 flex items-center gap-3 justify-center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+      <span class="text-sm font-semibold">Confidential Engagements</span>
+    </div>
+    <div class="glass rounded-xl p-4 flex items-center gap-3 justify-center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <span class="text-sm font-semibold">24/7 Monitoring</span>
+    </div>
+    <div class="glass rounded-xl p-4 flex items-center gap-3 justify-center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/></svg>
+      <span class="text-sm font-semibold">Certified Security Team</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / WHY CHOOSE US ============ -->
+<section id="about" class="py-28 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">WHY CYVAULT</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">Security built by people who think like attackers</h2>
+      <p class="mt-5" style="color:var(--muted);">We combine offensive security expertise with round-the-clock monitoring — giving organizations the clarity to know exactly where they stand, and the speed to fix it before it's exploited.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
+      <!-- why cards -->
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(59,130,246,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M12 2L20 6V12C20 17 16.5 20 12 22C7.5 20 4 17 4 12V6L12 2Z"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Certified Experts</h4>
+        <p class="text-sm" style="color:var(--muted);">OSCP, CEH and SOC-trained analysts leading every engagement.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(6,182,212,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Fast Response</h4>
+        <p class="text-sm" style="color:var(--muted);">Incident triage and SOC alerts handled within minutes, not days.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(124,58,237,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Detailed Reporting</h4>
+        <p class="text-sm" style="color:var(--muted);">Executive summaries plus technical depth your engineers can act on.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(34,197,94,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M12 1v22M5 5l14 14M19 5L5 19"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Confidential Engagement</h4>
+        <p class="text-sm" style="color:var(--muted);">NDA-first process; findings never leave a controlled channel.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Latest Security Tools</h4>
+        <p class="text-sm" style="color:var(--muted);">Modern offensive & defensive tooling, updated against live CVEs.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(59,130,246,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">AI-Powered Security</h4>
+        <p class="text-sm" style="color:var(--muted);">Machine-learning anomaly detection layered into SOC monitoring.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(6,182,212,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M3 6l9-4 9 4v6c0 5-4 8-9 10-5-2-9-5-9-10z"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Affordable Solutions</h4>
+        <p class="text-sm" style="color:var(--muted);">Enterprise-grade security scoped sensibly for growing organizations.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4" style="background:rgba(124,58,237,0.12);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        </div>
+        <h4 class="font-semibold mb-2">Industries We Serve</h4>
+        <p class="text-sm" style="color:var(--muted);">Finance, healthcare, education, government & software houses.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 reveal">
+      <a href="about.html" class="btn-outline inline-block font-semibold px-7 py-3 rounded-lg">See More About</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="py-28 relative" style="background:var(--secondary);">
+  <div class="cyber-grid" style="opacity:.5;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">SERVICES</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">End-to-end cyber defense</h2>
+      <p class="mt-5" style="color:var(--muted);">From offensive testing to continuous monitoring — a full stack of services to find, fix, and watch for the threats that matter.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+      <!-- service cards x9 -->
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(59,130,246,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Penetration Testing</h4>
+        <p class="text-sm" style="color:var(--muted);">Web, API, network, and wireless testing that mirrors real attacker behavior.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(6,182,212,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">SOC Monitoring</h4>
+        <p class="text-sm" style="color:var(--muted);">24/7 threat detection, alert triage, and continuous log correlation.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(124,58,237,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M5 3h14v18l-7-4-7 4z"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Digital Forensics</h4>
+        <p class="text-sm" style="color:var(--muted);">Evidence-grade investigation of breaches, fraud, and data incidents.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(239,68,68,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="1.8"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Incident Response</h4>
+        <p class="text-sm" style="color:var(--muted);">Rapid containment and recovery playbooks when something goes wrong.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(245,158,11,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Cloud Security</h4>
+        <p class="text-sm" style="color:var(--muted);">Configuration audits and hardening for AWS, Azure, and GCP environments.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+      <div class="service-card glass rounded-2xl p-7 reveal">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(34,197,94,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Malware Analysis</h4>
+        <p class="text-sm" style="color:var(--muted);">Static and dynamic reverse engineering to understand and contain threats.</p>
+        <a href="services.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 reveal">
+      <a href="services.html" class="btn-outline inline-block font-semibold px-7 py-3 rounded-lg">See Full Service Catalog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+                        CYVAULT ACADEMY
+=========================================================== -->
+<section id="academy" class="py-28 relative overflow-hidden">
+    <!-- Background -->
+    <div class="cyber-grid opacity-60"></div>
+
+    <div class="glow-orb"
+        style="width:420px;height:420px;background:var(--cyan);top:-120px;right:-140px;"></div>
+
+    <div class="glow-orb"
+        style="width:350px;height:350px;background:var(--purple);bottom:-100px;left:-100px;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+        <!-- Heading -->
+        <div class="text-center max-w-3xl mx-auto reveal">
+            <div class="eyebrow">CYVAULT ACADEMY</div>
+
+            <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">
+                Build Your Future in
+                <span class="grad-text">Cyber Security</span>
+            </h2>
+
+            <p class="mt-6 text-lg" style="color:var(--muted);">
+                Learn practical cybersecurity through industry-led training,
+                real-world labs, penetration testing exercises, SOC simulations,
+                and internship opportunities designed to prepare you for the
+                modern cyber workforce.
+            </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid lg:grid-cols-2 gap-14 items-center mt-20">
+
+            <!-- Left -->
+            <div class="reveal">
+
+                <div class="space-y-5">
+
+                    <div class="glass rounded-xl p-5 flex gap-4">
+
+                        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center"
+                            style="background:rgba(59,130,246,.15);">
+
+                            <svg width="24" height="24"
+                                fill="none"
+                                stroke="#3B82F6"
+                                stroke-width="1.8"
+                                viewBox="0 0 24 24">
+
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="font-semibold text-lg">
+                                Industry-Oriented Courses
+                            </h4>
+
+                            <p class="text-sm mt-2"
+                                style="color:var(--muted);">
+                                Learn ethical hacking, penetration testing,
+                                digital forensics, cloud security,
+                                SOC operations and more.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="glass rounded-xl p-5 flex gap-4">
+
+                        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center"
+                            style="background:rgba(6,182,212,.15);">
+
+                            <svg width="24"
+                                height="24"
+                                fill="none"
+                                stroke="#06B6D4"
+                                stroke-width="1.8"
+                                viewBox="0 0 24 24">
+
+                                <path d="M4 4h16v16H4z"/>
+                                <path d="M8 8h8v8H8z"/>
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="font-semibold text-lg">
+                                Practical Hands-on Labs
+                            </h4>
+
+                            <p class="text-sm mt-2"
+                                style="color:var(--muted);">
+                                Practice on real-world scenarios using
+                                Kali Linux, Burp Suite,
+                                Wireshark, Metasploit,
+                                Active Directory and more.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="glass rounded-xl p-5 flex gap-4">
+
+                        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center"
+                            style="background:rgba(124,58,237,.15);">
+
+                            <svg width="24"
+                                height="24"
+                                fill="none"
+                                stroke="#7C3AED"
+                                stroke-width="1.8"
+                                viewBox="0 0 24 24">
+
+                                <circle cx="12" cy="8" r="3"/>
+                                <path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="font-semibold text-lg">
+                                Expert Mentors
+                            </h4>
+
+                            <p class="text-sm mt-2"
+                                style="color:var(--muted);">
+
+                                Learn directly from cybersecurity
+                                professionals with practical industry
+                                experience.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="glass rounded-xl p-5 flex gap-4">
+
+                        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center"
+                            style="background:rgba(34,197,94,.15);">
+
+                            <svg width="24"
+                                height="24"
+                                fill="none"
+                                stroke="#22C55E"
+                                stroke-width="1.8"
+                                viewBox="0 0 24 24">
+
+                                <path d="M5 13l4 4L19 7"/>
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="font-semibold text-lg">
+                                Internship Opportunities
+                            </h4>
+
+                            <p class="text-sm mt-2"
+                                style="color:var(--muted);">
+
+                                Outstanding students may qualify
+                                for internships and work on
+                                real client projects.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Right -->
+            <div class="reveal-scale">
+
+                <div class="glass-strong rounded-3xl p-10">
+
+                    <div class="text-center">
+
+                        <div class="w-28 h-28 mx-auto rounded-full flex items-center justify-center mb-6"
+                            style="background:rgba(59,130,246,.15);">
+
+                            <svg width="60"
+                                height="60"
+                                fill="none"
+                                stroke="url(#academyGradient)"
+                                stroke-width="1.8"
+                                viewBox="0 0 24 24">
+
+                                <defs>
+
+                                    <linearGradient id="academyGradient">
+                                        <stop stop-color="#3B82F6"/>
+                                        <stop offset="1"
+                                            stop-color="#06B6D4"/>
+                                    </linearGradient>
+
+                                </defs>
+
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="font-display text-3xl font-bold">
+
+                            Learn Today.
+                            <br>
+                            Secure Tomorrow.
+
+                        </h3>
+
+                        <p class="mt-5"
+                            style="color:var(--muted);">
+
+                            Start your cybersecurity journey
+                            through structured learning,
+                            hands-on practice,
+                            career guidance,
+                            certifications,
+                            and internship pathways.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Statistics -->
+
+                    <div class="grid grid-cols-2 gap-5 mt-10">
+
+                        <div class="glass rounded-xl p-5 text-center">
+
+                            <div class="text-3xl font-bold grad-text">
+                                100%
+                            </div>
+
+                            <div class="text-sm mt-2"
+                                style="color:var(--muted);">
+
+                                Practical Learning
+
+                            </div>
+
+                        </div>
+
+                        <div class="glass rounded-xl p-5 text-center">
+
+                            <div class="text-3xl font-bold grad-text">
+                                Real
+                            </div>
+
+                            <div class="text-sm mt-2"
+                                style="color:var(--muted);">
+
+                                Industry Projects
+
+                            </div>
+
+                        </div>
+
+                        <div class="glass rounded-xl p-5 text-center">
+
+                            <div class="text-3xl font-bold grad-text">
+                                Expert
+                            </div>
+
+                            <div class="text-sm mt-2"
+                                style="color:var(--muted);">
+
+                                Mentors
+
+                            </div>
+
+                        </div>
+
+                        <div class="glass rounded-xl p-5 text-center">
+
+                            <div class="text-3xl font-bold grad-text">
+                                Career
+                            </div>
+
+                            <div class="text-sm mt-2"
+                                style="color:var(--muted);">
+                                Focused
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="flex flex-wrap justify-center gap-4 mt-10">
+
+                        <a href="academy.html"
+                            class="btn-primary px-7 py-3 rounded-lg font-semibold">
+                            Explore Academy
+                        </a>
+                        <a href="academy.html#courses"
+                            class="btn-outline px-7 py-3 rounded-lg font-semibold">
+
+                            Browse Programs
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============ INDUSTRIES WE PROTECT ============ -->
+<section class="py-28 relative" style="background:var(--secondary);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">SECTORS</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">Industries We Protect</h2>
+      <p class="mt-5" style="color:var(--muted);">Security programs tailored to the risk profile and compliance needs of each sector we serve.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(59,130,246,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div>
+        <h4 class="font-semibold text-sm">Banking</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(6,182,212,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M12 2v20M5 8l7-6 7 6M5 8v9a2 2 0 002 2h10a2 2 0 002-2V8"/></svg></div>
+        <h4 class="font-semibold text-sm">Healthcare</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(124,58,237,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h4 class="font-semibold text-sm">Education</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(34,197,94,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/></svg></div>
+        <h4 class="font-semibold text-sm">Government</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(245,158,11,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><path d="M8 9l3 3-3 3M13 15h3"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg></div>
+        <h4 class="font-semibold text-sm">Software Houses</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(59,130,246,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.6 13.4a2 2 0 002 1.6h9.8a2 2 0 002-1.6L22 7H6"/></svg></div>
+        <h4 class="font-semibold text-sm">E-Commerce</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(6,182,212,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M2 20h20M4 20V8l5-3v15M9 9h0M9 13h0M9 17h0M14 5l6 3v12M18 9h0M18 13h0M18 17h0"/></svg></div>
+        <h4 class="font-semibold text-sm">Manufacturing</h4>
+      </div>
+      <div class="glass rounded-2xl p-6 text-center reveal">
+        <div class="icon-wrap w-11 h-11 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background:rgba(124,58,237,0.12);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+        <h4 class="font-semibold text-sm">SMEs</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECHNOLOGIES & SECURITY PLATFORMS ============ -->
+<section class="py-28 relative">
+  <div class="cyber-grid" style="opacity:.5;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">OUR STACK</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">Technologies &amp; Security Platforms</h2>
+      <p class="mt-5" style="color:var(--muted);">Industry-standard offensive and defensive tooling used across every engagement.</p>
+    </div>
+    <div class="grid grid-cols-3 md:grid-cols-7 gap-5 mt-16">
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Kali Linux</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Burp Suite</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">OWASP</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Metasploit</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Nmap</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Nessus</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Wireshark</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Splunk</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Wazuh</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Microsoft Defender</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">CrowdStrike</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Elastic</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Docker</span></div>
+      <div class="glass rounded-xl p-4 flex flex-col items-center gap-2 reveal"><span class="mono text-xs text-center" style="color:var(--muted);">Linux</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">OUR PROCESS</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">A clear path from discovery to defense</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 relative">
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(59,130,246,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Discovery</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(59,130,246,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Scope Meeting</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(6,182,212,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Security Assessment</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(6,182,212,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Penetration Testing</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(124,58,237,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v3"/><path d="M9 13h10M9 17h6"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Reporting</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(124,58,237,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Remediation</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(34,197,94,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Retesting</h5>
+      </div>
+      <div class="process-step text-center reveal">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative z-10" style="border-color:rgba(34,197,94,0.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Continuous Monitoring</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" class="py-28 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="eyebrow">INSIGHTS</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">From the CYVault Blog</h2>
+      <p class="mt-5" style="color:var(--muted);">Research, advisories, and field notes from our security team.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(59,130,246,0.25), rgba(124,58,237,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.6"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>OWASP</span><span style="color:var(--muted);">6 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">Understanding the OWASP Top 10</h4>
+          <p class="text-sm" style="color:var(--muted);">A practical walkthrough of the most common web application risks and how to defend against them.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/understanding-owasp-top-10.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+        </div>
+        </div>
+      </article>
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(239,68,68,0.25), rgba(245,158,11,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="1.6"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>RANSOMWARE</span><span style="color:var(--muted);">5 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">Ransomware Protection Strategies</h4>
+          <p class="text-sm" style="color:var(--muted);">Backup, segmentation, and detection practices that limit blast radius when ransomware hits.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/ransomware-protection-strategies.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+          </div>
+        </div>
+      </article>
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(245,158,11,0.25), rgba(6,182,212,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.6"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>CLOUD SECURITY</span><span style="color:var(--muted);">7 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">Securing Multi-Cloud Environments</h4>
+          <p class="text-sm" style="color:var(--muted);">Common misconfigurations across AWS, Azure, and GCP — and how to harden against them.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/securing-multi-cloud-environments.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+          </div>
+        </div>
+      </article>
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(124,58,237,0.25), rgba(59,130,246,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>ZERO TRUST</span><span style="color:var(--muted);">6 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">Implementing a Zero Trust Architecture</h4>
+          <p class="text-sm" style="color:var(--muted);">Why "never trust, always verify" is becoming the standard for modern networks.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/zero-trust-security.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+          </div>
+        </div>
+      </article>
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(6,182,212,0.25), rgba(34,197,94,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>THREAT INTEL</span><span style="color:var(--muted);">8 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">Latest Cyber Threats to Watch</h4>
+          <p class="text-sm" style="color:var(--muted);">A roundup of emerging attacker techniques affecting organizations across the region.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/latest-cyber-threats.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+          </div>
+        </div>
+      </article>
+      <article class="service-card glass rounded-2xl overflow-hidden reveal">
+        <div class="h-40 flex items-center justify-center" style="background:linear-gradient(135deg, rgba(34,197,94,0.25), rgba(124,58,237,0.25));">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between text-xs mono mb-3" style="color:var(--cyan);"><span>AI &amp; SECURITY</span><span style="color:var(--muted);">5 min read</span></div>
+          <h4 class="font-semibold text-lg mb-2">AI in Cybersecurity: Promise and Risk</h4>
+          <p class="text-sm" style="color:var(--muted);">How machine learning improves detection — and the new attack surface it introduces.</p>
+          <div class="flex items-center justify-between mt-5">
+            <span class="text-xs" style="color:var(--muted);">By CYVault Research</span>
+            <a href="blogs/ai-in-cybersecurity-promise-and-risk.html" class="text-sm font-semibold" style="color:var(--cyan);">Read More →</a>          
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="text-center mt-12 reveal">
+      <a href="blogs/blog.html" class="btn-outline inline-block font-semibold px-7 py-3 rounded-lg">See All Blogs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="py-28 relative" style="background:var(--secondary);">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-5">Frequently Asked Questions</h2>
+    </div>
+    <div class="mt-14 space-y-4">
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          How long does Penetration Testing take?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Most engagements take 1–3 weeks depending on scope, with timelines confirmed during the scope meeting.</p></div>
+      </div>
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          Do you sign NDAs?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Yes. Every engagement begins with a signed NDA before any assessment work starts.</p></div>
+      </div>
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          How much does it cost?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Pricing depends on scope and complexity. Reach out for a free consultation and a tailored quote.</p></div>
+      </div>
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          Do you provide remediation reports?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Yes — every assessment includes a detailed report with executive summary, technical findings, and remediation guidance.</p></div>
+      </div>
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          Which industries do you serve?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Banking, healthcare, education, government, software houses, e-commerce, manufacturing, and SMEs.</p></div>
+      </div>
+      <div class="faq-item glass rounded-xl overflow-hidden reveal">
+        <button class="faq-toggle w-full text-left px-6 py-5 flex items-center justify-between font-semibold" onclick="toggleFaq(this)">
+          How quickly can you start?
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel px-6 text-sm" style="color:var(--muted);"><p class="pb-5">Standard engagements typically begin within 3–5 business days. Urgent incident response is available faster.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUCCESS STORIES CTA ============ -->
+<section class="py-24 relative">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <div class="eyebrow">CLIENT TRUST</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mt-5">Become one of our first cybersecurity success stories.</h2>
+    <p class="mt-4" style="color:var(--muted);">We're building our track record one confidential engagement at a time — your organization could be next.</p>
+    <a href="contact.html" class="btn-primary inline-block font-semibold px-8 py-4 rounded-lg mt-8" onclick="ripple(event)">Request Consultation</a>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="py-24 relative overflow-hidden">
+  <div class="glow-orb" style="width:400px;height:400px; background:var(--blue); top:0; left:30%;"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+    <div class="glass-strong rounded-3xl p-12 md:p-16">
+      <h2 class="font-display font-bold text-3xl md:text-4xl">Ready to Secure Your Business?</h2>
+      <p class="mt-4" style="color:var(--muted);">Schedule a free security consultation — no commitment, just clarity on where you stand.</p>
+      <a href="contact.html" class="btn-primary cta-glow inline-block font-semibold px-8 py-4 rounded-lg mt-8" onclick="ripple(event)">Schedule Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-28" style="background:var(--secondary);">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+    <div class="reveal">
+      <div class="eyebrow">GET IN TOUCH</div>
+      <h2 class="font-display font-bold text-4xl mt-5">Talk to a security specialist</h2>
+      <p class="mt-4" style="color:var(--muted);">Tell us about your organization and we'll respond with next steps within one business day.</p>
+
+      <div class="mt-9 space-y-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(59,130,246,0.12);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z"/></svg>
+          </div>
+          <span class="mono text-sm" style="color:var(--muted);">contact@cyvaultsecurity.com</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(6,182,212,0.12);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13 1 .33 1.99.6 2.95a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.13-1.17a2 2 0 012.11-.45c.96.27 1.95.47 2.95.6A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <span class="mono text-sm" style="color:var(--muted);">+92 300 0000000</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(124,58,237,0.12);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span class="mono text-sm" style="color:var(--muted);">Lahore, Pakistan</span>
+        </div>
+      </div>
+
+      <div class="flex gap-3 mt-9">
+        <a href="#" class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.76s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.76-1.75 1.76zm13.5 12.27h-3v-5.6c0-1.34-.03-3.07-1.88-3.07-1.88 0-2.17 1.47-2.17 2.98v5.69h-3v-11h2.88v1.5h.04c.4-.76 1.39-1.56 2.86-1.56 3.06 0 3.62 2.01 3.62 4.62v6.44z"/></svg></a>
+        <a href="#" class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-2.5 6.5h-1.4c-.5 0-1.1.2-1.1 1v1.5h2.5l-.3 2.5h-2.2v7h-2.6v-7h-2v-2.5h2v-2c0-2 1.1-3.3 3.2-3.3h1.9v3.3z"/></svg></a>
+        <a href="#" class="social-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+        <a href="#" class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+
+      <div class="mt-9 glass rounded-xl p-5">
+        <h5 class="font-semibold text-sm mb-2">Business Hours</h5>
+        <p class="text-sm" style="color:var(--muted);">Mon – Fri: 9:00 AM – 7:00 PM PKT<br>SOC monitoring: 24/7/365</p>
+      </div>
+
+      <div class="mt-5 glass rounded-xl p-5" style="border-color:rgba(239,68,68,0.3);">
+        <h5 class="font-semibold text-sm mb-2" style="color:var(--danger);">Emergency Contact</h5>
+        <p class="text-sm" style="color:var(--muted);">Active incident? Call our 24/7 emergency line: <span class="mono" style="color:var(--text);">+92 300 0000000</span></p>
+      </div>
+
+      <div class="flex flex-wrap gap-4 mt-6">
+        <a href="https://wa.me/923000000000" target="_blank" class="btn-outline font-semibold px-6 py-3 rounded-lg inline-flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8.8 8.8 0 0012 4a8.9 8.9 0 00-7.6 13.4L3 21l3.7-1A8.9 8.9 0 0012 21a8.9 8.9 0 006.3-15.2zm-5.6 13.6a7.4 7.4 0 01-3.8-1l-.3-.2-2.1.6.6-2-.2-.3a7.4 7.4 0 1112.5-5.3 7.4 7.4 0 01-6.7 8.2z"/></svg>
+          WhatsApp Us
+        </a>
+        <a href="contact.html" class="btn-primary font-semibold px-6 py-3 rounded-lg" onclick="ripple(event)">Book Consultation</a>
+      </div>
+
+      <div class="mt-9 glass rounded-xl overflow-hidden h-44 flex items-center justify-center" style="background:rgba(17,24,39,0.4);">
+        <div class="text-center" style="color:var(--muted);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" class="mx-auto mb-2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p class="text-xs mono">MAP PLACEHOLDER — LAHORE, PAKISTAN</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="glass-strong rounded-2xl p-8 space-y-5 reveal" onsubmit="handleSubmit(event)">
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="text-xs mono" style="color:var(--muted);">NAME</label>
+          <input required type="text" class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400" style="border-color:rgba(148,163,184,0.2);" placeholder="Your name">
+        </div>
+        <div>
+          <label class="text-xs mono" style="color:var(--muted);">COMPANY</label>
+          <input type="text" class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400" style="border-color:rgba(148,163,184,0.2);" placeholder="Company name">
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="text-xs mono" style="color:var(--muted);">EMAIL</label>
+          <input required type="email" class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400" style="border-color:rgba(148,163,184,0.2);" placeholder="you@company.com">
+        </div>
+        <div>
+          <label class="text-xs mono" style="color:var(--muted);">PHONE</label>
+          <input type="tel" class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400" style="border-color:rgba(148,163,184,0.2);" placeholder="+92 300 0000000">
+        </div>
+      </div>
+      <div>
+        <label class="text-xs mono" style="color:var(--muted);">SERVICE INTERESTED</label>
+        <select class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400" style="border-color:rgba(148,163,184,0.2);">
+          <option style="background:#111827;">Penetration Testing</option>
+          <option style="background:#111827;">SOC Monitoring</option>
+          <option style="background:#111827;">Digital Forensics</option>
+          <option style="background:#111827;">Cloud Security</option>
+          <option style="background:#111827;">IT Support</option>
+          <option style="background:#111827;">Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs mono" style="color:var(--muted);">MESSAGE</label>
+        <textarea rows="4" class="w-full mt-2 bg-transparent border rounded-lg px-4 py-3 text-sm outline-none focus:border-cyan-400 resize-none" style="border-color:rgba(148,163,184,0.2);" placeholder="Tell us about your security needs..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary w-full font-semibold px-7 py-3.5 rounded-lg" onclick="ripple(event)">Send Message</button>
+      <p id="formSuccess" class="text-sm text-center hidden" style="color:var(--success);">Message sent — we'll be in touch within one business day.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="pt-20 pb-8 relative" style="background:var(--primary); border-top:1px solid rgba(148,163,184,0.08);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-6 gap-10">
+      <div class="md:col-span-2">
+        <a href="#home" class="flex items-center gap-2.5 font-display font-bold text-lg mb-4">
+          <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+            <path d="M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z" stroke="#06B6D4" stroke-width="2" fill="rgba(59,130,246,0.08)"/>
+          </svg>
+          CYVault<span class="grad-text"> Security</span>
+        </a>
+        <p class="text-sm max-w-xs" style="color:var(--muted);">Protecting digital trust through penetration testing, SOC monitoring, and AI-powered cyber defense.</p>
+        <div class="mt-5">
+          <label class="text-xs mono" style="color:var(--muted);">SUBSCRIBE TO THREAT BRIEFS</label>
+          <div class="flex mt-2 max-w-xs">
+            <input type="email" placeholder="you@email.com" class="flex-1 bg-transparent border rounded-l-lg px-3 py-2.5 text-sm outline-none" style="border-color:rgba(148,163,184,0.2);">
+            <button class="btn-primary rounded-r-lg px-4 text-sm font-semibold">Join</button>
+          </div>
+        </div>
+        <div class="flex gap-3 mt-5">
+          <a href="#" class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.76s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.76-1.75 1.76zm13.5 12.27h-3v-5.6c0-1.34-.03-3.07-1.88-3.07-1.88 0-2.17 1.47-2.17 2.98v5.69h-3v-11h2.88v1.5h.04c.4-.76 1.39-1.56 2.86-1.56 3.06 0 3.62 2.01 3.62 4.62v6.44z"/></svg></a>
+          <a href="#" class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.76-1.34-1.76-1.1-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.08 1.84 2.84 1.3 3.52 1 .1-.78.42-1.3.76-1.6-2.66-.3-5.46-1.34-5.46-5.9 0-1.3.46-2.36 1.22-3.2-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.24a11.5 11.5 0 016 0c2.3-1.56 3.3-1.24 3.3-1.24.66 1.66.24 2.88.12 3.18.76.84 1.22 1.9 1.22 3.2 0 4.58-2.8 5.6-5.48 5.88.44.38.82 1.1.82 2.22v3.3c0 .32.22.7.82.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h6 class="font-semibold text-sm mb-4">Quick Links</h6>
+        <ul class="space-y-2.5 text-sm" style="color:var(--muted);">
+          <li><a href="about.html" class="hover:text-white">About</a></li>
+          <li><a href="blogs/blog.html" class="hover:text-white">Blog</a></li>
+          <li><a href="#process" class="hover:text-white">Process</a></li>
+          <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="font-semibold text-sm mb-4">Services</h6>
+        <ul class="space-y-2.5 text-sm" style="color:var(--muted);">
+          <li><a href="services.html" class="hover:text-white">Penetration Testing</a></li>
+          <li><a href="services.html" class="hover:text-white">SOC Monitoring</a></li>
+          <li><a href="services.html" class="hover:text-white">Digital Forensics</a></li>
+          <li><a href="services.html" class="hover:text-white">IT Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="font-semibold text-sm mb-4">Industries</h6>
+        <ul class="space-y-2.5 text-sm" style="color:var(--muted);">
+          <li><a href="services.html" class="hover:text-white">Banking</a></li>
+          <li><a href="services.html" class="hover:text-white">Healthcare</a></li>
+          <li><a href="services.html" class="hover:text-white">Government</a></li>
+          <li><a href="blogs/blog.html" class="hover:text-white">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="font-semibold text-sm mb-4">Contact</h6>
+        <ul class="space-y-2.5 text-sm" style="color:var(--muted);">
+          <li>info@cyvaultsecurity.com</li>
+          <li>+92 301 2345678</li>
+          <li>Lahore, Pakistan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center mt-14 pt-6 gap-4" style="border-top:1px solid rgba(148,163,184,0.08);">
+      <p class="text-xs" style="color:var(--muted);">© 2026 CYVault Security. All rights reserved.</p>
+      <div class="flex flex-wrap gap-6 text-xs" style="color:var(--muted);">
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Terms &amp; Conditions</a>
+        <a href="#" class="hover:text-white">Responsible Disclosure Policy</a>
+        <a href="/.well-known/security.txt" class="hover:text-white">Security.txt</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BLOG ARTICLE MODAL ============ -->
+<div id="blogModalOverlay" class="blog-modal-overlay" onclick="if(event.target===this)closeBlogModal()">
+  <div class="blog-modal glass-strong rounded-2xl">
+    <button class="blog-modal-close" onclick="closeBlogModal()" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="blog-modal-scroll">
+      <div class="flex items-center justify-between text-xs mono mb-3">
+        <span id="blogModalCategory" style="color:var(--cyan);"></span>
+        <span id="blogModalReadTime" style="color:var(--muted);"></span>
+      </div>
+      <h3 id="blogModalTitle" class="font-display font-bold text-2xl md:text-3xl mb-2"></h3>
+      <p id="blogModalByline" class="text-xs mb-7" style="color:var(--muted);"></p>
+      <div id="blogModalBody" class="blog-modal-body text-sm" style="color:var(--muted);"></div>
+      <div class="mt-8 pt-6 flex items-center justify-between flex-wrap gap-3" style="border-top:1px solid rgba(148,163,184,0.12);">
+        <span class="eyebrow">CYVAULT SECURITY RESEARCH DESK</span>
+        <a href="#contact" class="btn-primary font-semibold px-5 py-2.5 rounded-lg text-sm" onclick="closeBlogModal()">Talk to a Specialist</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Back to top -->
+<button id="backToTop" class="glass-strong text-white" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+// Loader
+window.addEventListener('load', ()=>{
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'), 400);
+});
+
+// Navbar scroll state
+const nav = document.getElementById('navbar');
+const backToTop = document.getElementById('backToTop');
+const progress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', ()=>{
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+  backToTop.classList.toggle('show', window.scrollY > 500);
+  const h = document.documentElement;
+  const pct = (h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = pct + '%';
+});
+
+// Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>mobileMenu.classList.add('hidden')));
+
+// Scroll reveal (with stagger per section)
+const sectionGroups = document.querySelectorAll('section, footer');
+sectionGroups.forEach(sec=>{
+  const items = sec.querySelectorAll('.reveal, .reveal-scale');
+  items.forEach((el,i)=>{ el.style.transitionDelay = Math.min(i*70,420)+'ms'; });
+});
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.15});
+document.querySelectorAll('.reveal, .reveal-scale').forEach(el=>observer.observe(el));
+
+// Cursor glow (desktop) — quiet ambient presence, not a spotlight
+const cursorGlow = document.getElementById('cursorGlow');
+if(window.matchMedia('(min-width:1025px)').matches){
+  let glowTimeout;
+  window.addEventListener('mousemove', (e)=>{
+    cursorGlow.style.opacity = '1';
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+    clearTimeout(glowTimeout);
+    glowTimeout = setTimeout(()=> cursorGlow.style.opacity='0', 2500);
+  });
+}
+
+// Subtle parallax on hero grid (scroll-linked, capped)
+const heroGrid = document.querySelector('#home .cyber-grid');
+window.addEventListener('scroll', ()=>{
+  if(!heroGrid) return;
+  const offset = Math.min(window.scrollY * 0.08, 40);
+  heroGrid.style.transform = `translateY(${offset}px)`;
+});
+
+// Scroll-spy active nav link
+const navLinks = document.querySelectorAll('.nav-link');
+const navSections = ['home','about','services','process','team','contact'].map(id=>document.getElementById(id)).filter(Boolean);
+const spyObs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(l=>{
+        l.classList.toggle('active', l.getAttribute('href') === '#'+entry.target.id);
+      });
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+navSections.forEach(s=>spyObs.observe(s));
+
+// Counters
+const counters = document.querySelectorAll('[data-count]');
+let countersStarted = false;
+function animateCounters(){
+  if(countersStarted) return;
+  countersStarted = true;
+  counters.forEach(el=>{
+    const target = parseFloat(el.getAttribute('data-count'));
+    const decimals = el.getAttribute('data-decimal') ? parseInt(el.getAttribute('data-decimal')) : 0;
+    let cur = 0;
+    const step = target / 60;
+    const tick = ()=>{
+      cur += step;
+      if(cur >= target){ el.textContent = target.toFixed(decimals); return; }
+      el.textContent = cur.toFixed(decimals);
+      requestAnimationFrame(tick);
+    };
+    tick();
+  });
+}
+const heroObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) animateCounters(); });
+},{threshold:0.3});
+heroObs.observe(document.querySelector('#home'));
+
+// Particles
+const field = document.getElementById('particleField');
+for(let i=0;i<35;i++){
+  const p = document.createElement('div');
+  p.className='particle';
+  p.style.left = Math.random()*100+'%';
+  p.style.bottom = '-10px';
+  p.style.animationDuration = (8+Math.random()*10)+'s';
+  p.style.animationDelay = (Math.random()*10)+'s';
+  field.appendChild(p);
+}
+
+// Ripple effect
+function ripple(e){
+  const btn = e.currentTarget;
+  const circle = document.createElement('span');
+  const d = Math.max(btn.clientWidth, btn.clientHeight);
+  circle.style.width = circle.style.height = d+'px';
+  circle.style.left = (e.clientX - btn.getBoundingClientRect().left - d/2)+'px';
+  circle.style.top = (e.clientY - btn.getBoundingClientRect().top - d/2)+'px';
+  circle.classList.add('ripple');
+  btn.appendChild(circle);
+  setTimeout(()=>circle.remove(), 650);
+}
+
+
+let lastFocusedBeforeModal = null;
+function openBlogModal(id){
+  const post = blogPosts[id];
+  if(!post) return;
+  document.getElementById('blogModalCategory').textContent = post.category;
+  document.getElementById('blogModalReadTime').textContent = post.readTime;
+  document.getElementById('blogModalTitle').textContent = post.title;
+  document.getElementById('blogModalByline').textContent = post.byline;
+  document.getElementById('blogModalBody').innerHTML = post.body;
+  const overlay = document.getElementById('blogModalOverlay');
+  overlay.classList.add('open');
+  document.body.classList.add('modal-open');
+  overlay.querySelector('.blog-modal-scroll').scrollTop = 0;
+}
+function closeBlogModal(){
+  document.getElementById('blogModalOverlay').classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') closeBlogModal();
+});
+
+// FAQ accordion
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const panel = item.querySelector('.faq-panel');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(o=>{
+    o.classList.remove('open');
+    o.querySelector('.faq-panel').style.maxHeight = null;
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+}
+
+// Form submit (placeholder)
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.remove('hidden');
+  e.target.reset();
+  setTimeout(()=>document.getElementById('formSuccess').classList.add('hidden'), 5000);
+}
+</script>
+</body>
+</html>

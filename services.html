@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Services | CYVault Security</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CYVault Security services: penetration testing, SOC monitoring, digital forensics, incident response, cloud security, malware analysis, vulnerability assessment, security awareness training, and managed IT support.">
+<link rel="canonical" href="https://www.cyvaultsecurity.com/services.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z' fill='%230A192F' stroke='%2306B6D4' stroke-width='2'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Services — CYVault Security">
+<meta property="og:description" content="End-to-end cyber defense: penetration testing, SOC monitoring, digital forensics, cloud security, incident response and more.">
+<meta property="og:url" content="https://www.cyvaultsecurity.com/services.html">
+<meta property="og:site_name" content="CYVault Security">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Services — CYVault Security">
+<meta name="twitter:description" content="End-to-end cyber defense: penetration testing, SOC monitoring, digital forensics, cloud security, incident response and more.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --primary:#0A192F;--secondary:#111827;--blue:#3B82F6;--cyan:#06B6D4;
+  --purple:#7C3AED;--text:#FFFFFF;--muted:#94A3B8;--success:#22C55E;--warning:#F59E0B;--danger:#EF4444;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--primary);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+::selection{background:var(--cyan);color:#000;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--primary);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--cyan));border-radius:4px;}
+
+#scrollProgress{position:fixed;top:0;left:0;height:3px;z-index:1100;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));width:0%;}
+
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .35s ease;border-bottom:1px solid transparent;}
+#navbar.scrolled{background:rgba(10,25,47,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(148,163,184,0.1);}
+.nav-link{position:relative;color:var(--muted);transition:color .25s;text-decoration:none;font-size:.875rem;}
+.nav-link:hover{color:var(--text);}
+.nav-link::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .3s ease;}
+.nav-link:hover::after,.nav-link.active::after{width:100%;}
+.nav-link.active{color:var(--cyan);}
+
+.btn-primary{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#fff;font-weight:700;transition:transform .25s,box-shadow .25s;display:inline-block;text-decoration:none;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(59,130,246,0.55);}
+.btn-outline{border:1px solid rgba(148,163,184,0.3);color:var(--text);transition:all .3s ease;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--cyan);box-shadow:0 0 20px -4px rgba(6,182,212,0.5);background:rgba(6,182,212,0.06);}
+
+.glass{background:rgba(17,24,39,0.55);backdrop-filter:blur(16px);border:1px solid rgba(148,163,184,0.12);}
+.glass-strong{background:rgba(17,24,39,0.82);backdrop-filter:blur(20px);border:1px solid rgba(148,163,184,0.15);}
+
+.grad-text{background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(6,182,212,0.3);padding:6px 14px;border-radius:999px;background:rgba(6,182,212,0.06);}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:pulse-dot 1.6s infinite;display:inline-block;}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.cyber-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.07) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 40%,transparent 100%);}
+.glow-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;pointer-events:none;}
+
+/* Service cards */
+.service-card{position:relative;overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),border-color .45s ease,box-shadow .45s ease;}
+.service-card:hover{transform:translateY(-6px);border-color:rgba(59,130,246,0.4);box-shadow:0 20px 50px -20px rgba(59,130,246,0.35);}
+.icon-wrap{transition:transform .4s ease,box-shadow .4s ease;}
+.service-card:hover .icon-wrap{transform:scale(1.08) rotate(-4deg);box-shadow:0 0 25px -2px rgba(6,182,212,0.6);}
+.service-card .corner-glow{position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(124,58,237,0.4),transparent 70%);opacity:0;transition:opacity .4s ease;}
+.service-card:hover .corner-glow{opacity:1;}
+
+/* Process */
+.process-step{position:relative;}
+.process-line{position:absolute;top:28px;left:50%;width:100%;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.5),rgba(6,182,212,0.1));z-index:0;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* Back to top */
+#backToTop{position:fixed;bottom:28px;right:28px;z-index:900;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;transform:translateY(10px);background:rgba(17,24,39,0.82);backdrop-filter:blur(20px);border:1px solid rgba(148,163,184,0.15);color:#fff;cursor:pointer;}
+#backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+
+/* Mobile menu */
+#mobileMenu{display:none;}
+#mobileMenu.open{display:flex;flex-direction:column;gap:1rem;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}
+}
+</style>
+</head>
+<body>
+<div id="scrollProgress"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5 font-bold text-lg" style="text-decoration:none;color:#fff;font-family:'Space Grotesk',sans-serif;">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z" stroke="url(#ng1)" stroke-width="2" fill="rgba(59,130,246,0.08)"/>
+        <rect x="14" y="18" width="12" height="10" rx="2" stroke="#06B6D4" stroke-width="1.6"/>
+        <path d="M16.5 18V15.5C16.5 13 18 11.5 20 11.5C22 11.5 23.5 13 23.5 15.5V18" stroke="#3B82F6" stroke-width="1.6"/>
+        <circle cx="20" cy="22.5" r="1.6" fill="#06B6D4"/>
+        <defs><linearGradient id="ng1" x1="6" y1="3" x2="34" y2="37"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+      </svg>
+      <span>CYVault<span class="grad-text"> Security</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-9">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link active">Services</a>
+      <a href="blogs/blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#academy" class="btn-primary hidden lg:inline-block text-sm font-semibold px-5 py-2.5 rounded-lg">Academy</a>
+    <button id="menuBtn" class="lg:hidden text-white" style="background:none;border:none;cursor:pointer;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="glass-strong lg:hidden mx-4 mt-3 rounded-xl p-5">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link active">Services</a>
+    <a href="blogs/blog.html" class="nav-link">Blog</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="index.html#academy" class="btn-primary text-sm font-semibold px-5 py-2.5 rounded-lg text-center mt-2">Academy</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:150px 0 80px;position:relative;overflow:hidden;">
+  <div class="cyber-grid"></div>
+  <div class="glow-orb" style="width:500px;height:500px;background:var(--blue);top:-120px;left:-150px;"></div>
+  <div class="glow-orb" style="width:400px;height:400px;background:var(--purple);bottom:-80px;right:-100px;"></div>
+  <div class="max-w-4xl mx-auto px-6 relative text-center" style="z-index:1;">
+    <div class="eyebrow reveal in"><span class="dot-live"></span> OUR SERVICES</div>
+    <h1 class="reveal in" style="font-size:clamp(2.25rem,6vw,3.75rem);font-weight:700;line-height:1.15;margin-top:1.5rem;">
+      End-to-end <span class="grad-text">cyber defense</span>
+    </h1>
+    <p class="reveal in" style="color:var(--muted);margin-top:1.5rem;font-size:1.125rem;max-width:640px;margin-left:auto;margin-right:auto;">
+      From offensive testing to continuous monitoring — a full stack of services to find, fix, and watch for the threats that matter.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center mt-9 reveal in">
+      <a href="contact.html" class="btn-primary font-semibold px-7 py-3.5 rounded-lg">Request Assessment</a>
+      <a href="#service-list" class="btn-outline font-semibold px-7 py-3.5 rounded-lg">Browse Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section id="service-list" class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(59,130,246,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M12 2l8 4v6c0 6-4 9-8 10-4-1-8-4-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Penetration Testing</h4>
+        <p class="text-sm" style="color:var(--muted);">Web, API, network, and wireless testing that mirrors real attacker behavior to uncover exploitable weaknesses before criminals do.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(6,182,212,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">SOC Monitoring</h4>
+        <p class="text-sm" style="color:var(--muted);">24/7 threat detection, alert triage, and continuous log correlation from a dedicated security operations center.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(124,58,237,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M5 3h14v18l-7-4-7 4z"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Digital Forensics</h4>
+        <p class="text-sm" style="color:var(--muted);">Evidence-grade investigation of breaches, fraud, and data incidents — built to hold up under scrutiny.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(239,68,68,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="1.8"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Incident Response</h4>
+        <p class="text-sm" style="color:var(--muted);">Rapid containment and recovery playbooks when something goes wrong, minimizing downtime and damage.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(245,158,11,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Cloud Security</h4>
+        <p class="text-sm" style="color:var(--muted);">Configuration audits and hardening for AWS, Azure, and GCP environments against common misconfigurations.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(34,197,94,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Malware Analysis</h4>
+        <p class="text-sm" style="color:var(--muted);">Static and dynamic reverse engineering to understand, contain, and eradicate malicious code.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(59,130,246,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Vulnerability Assessment</h4>
+        <p class="text-sm" style="color:var(--muted);">Systematic scanning and manual verification to build a prioritized, risk-ranked view of your exposure.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(6,182,212,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13 1 .33 1.99.6 2.95a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.13-1.17a2 2 0 012.11-.45c.96.27 1.95.47 2.95.6A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Security Awareness Training</h4>
+        <p class="text-sm" style="color:var(--muted);">Phishing simulations and staff training that turn your team into a human firewall, not the weakest link.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal in">
+        <div class="corner-glow"></div>
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(124,58,237,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        </div>
+        <h4 class="font-semibold text-lg mb-2">Managed IT &amp; Security Support</h4>
+        <p class="text-sm" style="color:var(--muted);">Ongoing infrastructure hardening, patch management, and support for growing organizations.</p>
+        <a href="contact.html" class="text-sm font-semibold mt-4 inline-flex items-center gap-1" style="color:var(--cyan);text-decoration:none;">Request This Service →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="py-24 relative" style="background:var(--secondary);">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal in">
+      <div class="eyebrow">OUR PROCESS</div>
+      <h2 class="font-bold text-3xl md:text-4xl mt-5">A clear path from discovery to defense</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 relative">
+      <div class="process-step text-center reveal in">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative" style="border-color:rgba(59,130,246,0.4);z-index:1;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Discovery</h5>
+      </div>
+      <div class="process-step text-center reveal in">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative" style="border-color:rgba(59,130,246,0.4);z-index:1;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Scope Meeting</h5>
+      </div>
+      <div class="process-step text-center reveal in">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative" style="border-color:rgba(6,182,212,0.4);z-index:1;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Security Assessment</h5>
+      </div>
+      <div class="process-step text-center reveal in">
+        <div class="w-14 h-14 mx-auto rounded-full glass flex items-center justify-center mb-4 relative" style="border-color:rgba(124,58,237,0.4);z-index:1;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v3"/><path d="M9 13h10M9 17h6"/></svg>
+        </div>
+        <h5 class="font-semibold text-sm">Reporting &amp; Remediation</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 relative overflow-hidden">
+  <div class="glow-orb" style="width:400px;height:400px;background:var(--blue);top:0;left:30%;"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative reveal in" style="z-index:1;">
+    <div class="glass-strong rounded-3xl p-12 md:p-16">
+      <h2 class="font-bold text-3xl md:text-4xl">Not sure which service you need?</h2>
+      <p class="mt-4" style="color:var(--muted);">Schedule a free security consultation and we'll help you scope the right engagement.</p>
+      <a href="contact.html" class="btn-primary inline-block font-semibold px-8 py-4 rounded-lg mt-8">Schedule Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid rgba(255,255,255,.08);padding:60px 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-12">
+      <div>
+        <a href="index.html" class="flex items-center gap-2.5 font-bold text-lg" style="text-decoration:none;color:#fff;font-family:'Space Grotesk',sans-serif;">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+            <path d="M20 3L34 8V19C34 27.5 28 33.5 20 37C12 33.5 6 27.5 6 19V8L20 3Z" stroke="url(#fg1)" stroke-width="2" fill="rgba(59,130,246,0.08)"/>
+            <rect x="14" y="18" width="12" height="10" rx="2" stroke="#06B6D4" stroke-width="1.6"/>
+            <path d="M16.5 18V15.5C16.5 13 18 11.5 20 11.5C22 11.5 23.5 13 23.5 15.5V18" stroke="#3B82F6" stroke-width="1.6"/>
+            <circle cx="20" cy="22.5" r="1.6" fill="#06B6D4"/>
+            <defs><linearGradient id="fg1" x1="6" y1="3" x2="34" y2="37"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+          </svg>
+          <span>CYVault<span class="grad-text"> Security</span></span>
+        </a>
+        <p style="color:var(--muted);margin-top:1.25rem;line-height:1.75;font-size:.9rem;">Protecting digital trust through penetration testing, SOC monitoring, and AI-powered cyber defense.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1.25rem;">Company</h4>
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+          <a href="index.html" style="color:var(--muted);text-decoration:none;font-size:.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">Home</a>
+          <a href="about.html" style="color:var(--muted);text-decoration:none;font-size:.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">About</a>
+          <a href="services.html" style="color:var(--cyan);text-decoration:none;font-size:.9rem;">Services</a>
+          <a href="index.html#academy" style="color:var(--muted);text-decoration:none;font-size:.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">Academy</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1.25rem;">Resources</h4>
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+          <a href="blogs/blog.html" style="color:var(--muted);text-decoration:none;font-size:.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">Blog</a>
+          <a href="contact.html" style="color:var(--muted);text-decoration:none;font-size:.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:1.25rem;">Contact</h4>
+        <p style="color:var(--muted);font-size:.9rem;">contact@cyvaultsecurity.com</p>
+        <p style="color:var(--muted);margin-top:.5rem;font-size:.9rem;">www.cyvaultsecurity.com</p>
+      </div>
+    </div>
+    <hr style="margin:45px 0;border-color:rgba(255,255,255,.08);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;">
+      <p style="color:#64748B;font-size:.85rem;">© 2026 CYVault Security. All Rights Reserved.</p>
+      <p style="color:#64748B;font-size:.85rem;">Built for a Safer Digital Future.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+const prog = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  document.getElementById('backToTop').classList.toggle('show', window.scrollY > 500);
+});
+document.getElementById('menuBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
